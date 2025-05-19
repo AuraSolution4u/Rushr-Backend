@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  java-backend:
+    image: java-backend
+    container_name: java_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://3.101.141.33:3306/rushr
+      SPRING_DATASOURCE_USERNAME: rushr_admin
+      SPRING_DATASOURCE_PASSWORD: admin78rushr232
+
+  mysql:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: rushr
+      MYSQL_USER: rushr_admin
+      MYSQL_PASSWORD: admin78rushr232
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:
+

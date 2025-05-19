@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <!-- Appender for Console Output -->
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <!-- The log format pattern -->
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [%t] %c{1}:%L - %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <!-- Appender for Rolling File Output -->
+        <RollingFile name="File" fileName="C:/log/rushr.log" filePattern="C:/log/rushr-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <!-- The log format pattern -->
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [%t] %c{1}:%L - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- Rolling every 1 day -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <!-- Loggers Configuration -->
+    <Loggers>
+        <!-- Root Logger: Log at INFO level and log to both console and file -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+
+        <!-- Example: Specific Logger for a package -->
+        <Logger name="com.example" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+    </Loggers>
+</Configuration>

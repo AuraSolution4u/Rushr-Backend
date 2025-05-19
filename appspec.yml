@@ -1,0 +1,29 @@
+version: 0.0
+os: linux
+files:
+  - source: .
+    destination: /opt/rushr-backend
+
+permissions:
+  - object: /opt/rushr-backend
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
+    type:
+      - directory
+
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: ubuntu
+
+  ApplicationStop:
+    - location: scripts/stop.sh
+      timeout: 300
+      runas: ubuntu
+
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: ubuntu
